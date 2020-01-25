@@ -66,6 +66,7 @@ nnoremap <silent> <BS> :<C-u>nohl<CR>
 nnoremap <silent>        U       :<C-U>call search('\u')<CR>
 onoremap <silent>        U       :<C-U>call search('\u')<CR>
 
+
 " lsp config
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
@@ -102,6 +103,8 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 " fuzzy search
 nnoremap <silent> <c-p> :<C-u>FZF<CR>
 
+" jump
+nnoremap <silent> gd :LspDefinition<CR>
 
 " theme
 colo codedark
