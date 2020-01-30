@@ -118,7 +118,7 @@ let g:netrw_winsize = 20
 augroup ProjectDrawer
   autocmd!
   " autocmd VimEnter * Vexplore | exe "normal! \<C-w>\<C-w>"
-  au VimEnter * NERDTree
+  au VimEnter * NERDTree | exe "normal! \<C-w>\<C-w>"
 augroup END
 
 
@@ -243,3 +243,28 @@ endfunction " }}}
 
 set showtabline=2
 set tabline=%!TabLine()
+
+
+" Grep for word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" use ag for vim grep
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag for FZF
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+  " Using Ag for global grep
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+  nnoremap ? :Ag<SPACE>
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
