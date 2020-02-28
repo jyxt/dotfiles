@@ -19,6 +19,8 @@ set scrolloff=5
 set signcolumn=yes
 set ignorecase
 set smartcase
+filetype on
+filetype plugin on
 
 set wildignore+=*.exe
 set wildignore+=*.gz
@@ -51,6 +53,8 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'tpope/vim-fugitive'
+Plug 'mindriot101/vim-yapf'
 
 
 call plug#end()
@@ -109,7 +113,10 @@ nnoremap <silent> gd :LspDefinition<CR>
 " theme
 colo codedark
 
+" format
+nnoremap <F1> :call Yapf()<CR>
 
+" format
 " netrw
 let g:netrw_banner=0
 let g:netrw_liststyle=3
@@ -254,7 +261,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag for FZF
-  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 
   " Using Ag for global grep
   command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -268,3 +275,5 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+
+:map <F9> :normal i import pdb; pdb.set_trace()<ESC>
