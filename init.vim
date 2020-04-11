@@ -35,6 +35,10 @@ set wildignore+=desktop.ini
 
 set completeopt+=menuone
 set completeopt+=noselect
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 call plug#begin()
 
@@ -55,6 +59,15 @@ Plug 'tpope/vim-commentary'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-fugitive'
 Plug 'mindriot101/vim-yapf'
+
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'cocopon/iceberg.vim'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'ryanolsonx/vim-lsp-typescript'
 
 
 call plug#end()
@@ -111,7 +124,7 @@ nnoremap <silent> <c-p> :<C-u>FZF<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 
 " theme
-colo codedark
+colo iceberg
 
 " format
 nnoremap <F1> :call Yapf()<CR>
@@ -277,3 +290,12 @@ endif
 
 
 :map <F9> :normal i import pdb; pdb.set_trace()<ESC>
+
+function! SyntaxInfo() " {{{
+    let id = synID(line('.'), col('.'), 1)
+    exec 'hi' synIDattr(id, 'name')
+
+    let tr = synIDtrans(id)
+    exec 'hi' synIDattr(tr, 'name')
+endfunction " }}}
+nnoremap <C-l> :<C-u>call SyntaxInfo()<CR>

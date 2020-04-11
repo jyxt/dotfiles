@@ -123,20 +123,28 @@ if [ -f '/home/sheldon.chi/google-cloud-sdk-223.0.0/google-cloud-sdk/completion.
 
 set -o vi
 alias vim=nvim
-alias vl="vault login -method=okta username=sheldon.chi@getcruise.com"
-export VAULT_ADDR=https://vault.secure.car:8200
-export EDITOR=vim
-export PATH=$HOME/.pyenv/bin:$PATH
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export PYTHONDONTWRITEBYTECODE=1
-export PATH=$HOME/.pyenv/bin:$PATH
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# alias vl="vault login -method=okta username=sheldon.chi@getcruise.com"
+# export VAULT_ADDR=https://vault.secure.car:8200
+# export EDITOR=vim
+# export PATH=$HOME/.pyenv/bin:$PATH
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# export PYTHONDONTWRITEBYTECODE=1
+# export PATH=$HOME/.pyenv/bin:$PATH
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 [ -f ~/Downloads/forgit/forgit.plugin.sh ] && source ~/Downloads/forgit/forgit.plugin.sh
 
-export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \[\033[0;36m\]\h \w\[\033[0;32m\]$(__git_ps1)\n\[\033[0;32m\]└─\[\033[0;32m\] \$\[\033[0;32m\] ▶\[\033[0m\]'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
+      . /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+  fi
+  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+fi
+
+
+export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \[\033[0;36m\]\h \w\[\033[0;32m\]$(__git_ps1)\n\[\033[0;32m\]└─\[\033[0;32m\] \$\[\033[0;32m\] ▶ \[\033[0m\]'
 
